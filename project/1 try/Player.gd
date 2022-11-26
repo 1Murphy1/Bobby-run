@@ -30,7 +30,7 @@ func _physics_process(delta):
 		velocity.y = -JUMP_POWER
 		$AnimatedSprite.play("jump")
 		position.x = clamp(position.x, 0, 1600)
-
+ 
 
 	
 		
