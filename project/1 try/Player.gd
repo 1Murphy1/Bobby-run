@@ -29,6 +29,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_up") && is_on_floor():
 		velocity.y = -JUMP_POWER
 		$AnimatedSprite.play("jump")
+		position.x = clamp(position.x, 0, 1600)
+
 
 	
 		
