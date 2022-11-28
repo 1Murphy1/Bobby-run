@@ -1,0 +1,135 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://1 try/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://1 try/platforma.tscn" type="PackedScene" id=2]
+[ext_resource path="res://1 try/black platform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sprites/level1.png" type="Texture" id=4]
+[ext_resource path="res://1 try/end.tscn" type="PackedScene" id=5]
+[ext_resource path="res://1 try/moveplat.tscn" type="PackedScene" id=6]
+[ext_resource path="res://1 try/moveplat.gd" type="Script" id=7]
+[ext_resource path="res://Ship.tscn" type="PackedScene" id=8]
+[ext_resource path="res://1 try/fish.tscn" type="PackedScene" id=9]
+[ext_resource path="res://1 try/tp.gd" type="Script" id=10]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 520, 347 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "moveplat"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 520, 347 ), Vector2( 745, 347 ), Vector2( 520, 347 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16.5, 52.5 )
+
+[node name="level1" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 55, 231 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 800, 401 )
+scale = Vector2( 1, 0.801 )
+texture = ExtResource( 4 )
+
+[node name="black platform" parent="." instance=ExtResource( 3 )]
+position = Vector2( 74, 297 )
+scale = Vector2( 1.67, 1 )
+
+[node name="platforma" parent="." instance=ExtResource( 2 )]
+position = Vector2( 196, 275 )
+scale = Vector2( 0.9, 1 )
+
+[node name="platforma2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 329, 384 )
+scale = Vector2( 0.9, 1 )
+
+[node name="end" parent="." instance=ExtResource( 5 )]
+position = Vector2( 829, 698 )
+
+[node name="moveplat" parent="." instance=ExtResource( 6 )]
+position = Vector2( 520, 347 )
+script = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="moveplat"]
+anims/RESET = SubResource( 3 )
+anims/moveplat = SubResource( 2 )
+
+[node name="moveplat" parent="moveplat" instance=ExtResource( 6 )]
+position = Vector2( 389.473, 76 )
+
+[node name="platforma3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 508, 452 )
+
+[node name="platforma4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 329, 525 )
+
+[node name="platforma5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 522, 600 )
+scale = Vector2( 2, 1 )
+
+[node name="Ship" parent="." instance=ExtResource( 8 )]
+position = Vector2( 524, 583 )
+
+[node name="platforma6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 912, 284 )
+
+[node name="platforma7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 718, 233 )
+
+[node name="platforma8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1363, 451 )
+
+[node name="black platform2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1512, 434 )
+scale = Vector2( 2, 1 )
+
+[node name="fish" parent="." instance=ExtResource( 9 )]
+position = Vector2( 576, 532 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="fish2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 702, 178 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="tp" type="Area2D" parent="."]
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tp"]
+position = Vector2( 1583, 406 )
+shape = SubResource( 4 )
+
+[connection signal="body_entered" from="tp" to="tp" method="_on_tp_body_entered"]
+[connection signal="body_exited" from="tp" to="tp" method="_on_tp_body_exited"]
