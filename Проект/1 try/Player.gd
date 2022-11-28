@@ -47,3 +47,7 @@ func ApplyDMG(dmg:int):
 		
 	if Health <= 0:
 		get_tree().reload_current_scene()
+
+
+func _on_teleport_body_entered(body):
+	get_tree().change_scene("res://1 try/level2.tscn")
