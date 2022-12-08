@@ -1,10 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://sprites/shi2.png" type="Texture" id=1]
-[ext_resource path="res://shi2.gd" type="Script" id=2]
 
 [node name="shi2" type="Area2D"]
-script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
